@@ -424,3 +424,34 @@ video {
   margin-top: 8px;
   background: #000;
 }
+
+/* Estilo simple para el botón del tema */
+#theme-toggle {
+  font-size: 1.1rem;
+  padding: 6px 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Forzar tema oscuro cuando el atributo data-theme es 'dark' */
+:root[data-theme="dark"] {
+  --bg: #121214;
+  --card: #1c1c20;
+  --tx: #f1f0ee;
+  --mu: #9d9ba6;
+  --bd: #2d2d34;
+  color-scheme: dark;
+}
+
+/* Forzar tema claro cuando el atributo data-theme es 'light' */
+:root[data-theme="light"] {
+  --bg: #f6f5f2;
+  --card: #fff;
+  --tx: #1c1b1a;
+  --mu: #6b6a67;
+  --bd: #e4e2dc;
+  color-scheme: light;
+}
