@@ -1,32 +1,426 @@
-:root{--bg:#f6f5f2;--card:#fff;--tx:#1c1b1a;--mu:#6b6a67;--bd:#e4e2dc;--ac:#6d4aff;--ac2:#ff4a8d;--ok:#1f9d63;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121214;--card:#1c1c20;--tx:#f1f0ee;--mu:#9d9ba6;--bd:#2d2d34;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#121214;--card:#1c1c20;--tx:#f1f0ee;--mu:#9d9ba6;--bd:#2d2d34;color-scheme:dark}
-*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
-h1,h2,h3{margin:0 0 .4em;line-height:1.2}h2{font-size:1.1rem}h3{font-size:.95rem}
-.mu{color:var(--mu)}.wrap{max-width:1040px;margin:0 auto;padding:16px}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:14px}
-header{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-.logo{font-weight:800;font-size:1.25rem;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:14px}
-.tabs button,.seg button{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:9px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;font:inherit}
-.tabs button.on,.seg button.on{background:var(--ac);border-color:var(--ac);color:#fff}
-.seg{display:flex;gap:6px;margin:12px 0}
-label{display:block;font-size:.85rem;color:var(--mu);margin:10px 0 0}
-input,select,textarea{width:100%;margin-top:4px;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit}
-textarea{min-height:240px;resize:vertical}
-.btn{background:var(--ac);color:#fff;border:0;padding:10px 16px;border-radius:10px;cursor:pointer;font:inherit;font-weight:600;margin-top:12px}
-.btn.ghost{background:transparent;color:var(--tx);border:1px solid var(--bd)}.btn.sm{padding:6px 10px;margin:0;font-size:.85rem}.btn.red{background:#d64545}
-.btn:disabled{opacity:.5;cursor:not-allowed}
-.auth{max-width:400px;margin:6vh auto;padding:16px}.or{text-align:center;color:var(--mu);margin:10px 0 0}.err{color:#d64545;min-height:1.2em;margin:8px 0 0}
-.grid2{display:grid;grid-template-columns:260px 1fr;gap:14px}@media(max-width:760px){.grid2{grid-template-columns:1fr}}
-.item{padding:10px;border:1px solid var(--bd);border-radius:10px;margin-bottom:8px;cursor:pointer}.item.on{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,transparent)}
-.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>*{flex:1}.row .btn{flex:0 0 auto;margin-top:12px}
-.net{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px;border:1px solid var(--bd);border-radius:10px;margin-bottom:8px}
-.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;background:var(--bd)}.dot.ok{background:var(--ok)}
-.flow{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:.85rem;margin:6px 0 10px}.flow span{padding:4px 10px;border-radius:999px;background:var(--bg);border:1px solid var(--bd)}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px}
-.stat{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px}.stat b{font-size:1.8rem;display:block}
-.bar{margin:8px 0}.bar div.t{height:12px;background:var(--bg);border-radius:6px;overflow:hidden;border:1px solid var(--bd)}.bar i{display:block;height:100%;border-radius:6px}
-table{width:100%;border-collapse:collapse;font-size:.9rem}td,th{text-align:left;padding:8px 6px;border-bottom:1px solid var(--bd)}
-.tag{padding:2px 8px;border-radius:999px;font-size:.75rem;background:var(--bg);border:1px solid var(--bd)}
-video{width:100%;max-height:240px;border-radius:10px;margin-top:8px;background:#000}
+/* ============================================================================
+   1. VARIABLES DE TEMA Y CONFIGURACIÓN INICIAL (ROOT)
+   ============================================================================ */
+
+:root {
+  /* Paleta de colores para el tema Claro (Light Mode) */
+  --bg: #f6f5f2;       /* Color de fondo principal de la aplicación */
+  --card: #fff;        /* Color de fondo para tarjetas y contenedores elevativos */
+  --tx: #1c1b1a;      /* Color de texto principal */
+  --mu: #6b6a67;      /* Color para texto secundario o atenuado (muted) */
+  --bd: #e4e2dc;      /* Color de bordes y separadores */
+  --ac: #6d4aff;      /* Color de acento primario (Púrpura) */
+  --ac2: #ff4a8d;     /* Color de acento secundario (Rosa) */
+  --ok: #1f9d63;      /* Color de estado exitoso / activo (Verde) */
+
+  color-scheme: light; /* Indica al navegador que use estilos de sistema claros */
+  box-sizing: border-box; /* Incluye padding y border en el cálculo del ancho total */
+
+  /* Respeta las áreas seguras de pantallas con notch/corte (smartphones) */
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Detecta si el sistema operativo prefiere el Modo Oscuro y no se ha forzado el tema claro */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121214;     /* Fondo principal oscuro */
+    --card: #1c1c20;   /* Fondo de tarjeta oscuro */
+    --tx: #f1f0ee;     /* Texto claro */
+    --mu: #9d9ba6;     /* Texto secundario claro */
+    --bd: #2d2d34;     /* Borde oscuro */
+    color-scheme: dark;
+  }
+}
+
+/* Aplica el Modo Oscuro cuando se fuerza manualmente mediante el atributo data-theme="dark" */
+:root[data-theme="dark"] {
+  --bg: #121214;
+  --card: #1c1c20;
+  --tx: #f1f0ee;
+  --mu: #9d9ba6;
+  --bd: #2d2d34;
+  color-scheme: dark;
+}
+
+/* ============================================================================
+   2. ESTILOS BASE Y REPOBLACIÓN GENERAL
+   ============================================================================ */
+
+/* Hereda el modelo de caja border-box a todos los elementos del DOM */
+* {
+  box-sizing: border-box;
+}
+
+/* Elimina márgenes por defecto en la estructura de la página */
+html, body {
+  margin: 0;
+}
+
+/* Configuración tipográfica global y fondo general de la app */
+body {
+  background: var(--bg);
+  color: var(--tx);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Estilos unificados para encabezados */
+h1, h2, h3 {
+  margin: 0 0 .4em;  /* Margen inferior pequeño */
+  line-height: 1.2;  /* Interlineado compacto */
+}
+
+h2 {
+  font-size: 1.1rem;
+}
+
+h3 {
+  font-size: .95rem;
+}
+
+/* Clase de texto atenúado/secundario */
+.mu {
+  color: var(--mu);
+}
+
+/* Contenedor principal para centrar el contenido en pantalla */
+.wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* ============================================================================
+   3. COMPONENTES Y ESTRUCTURAS DE LA UI
+   ============================================================================ */
+
+/* Tarjetas contenedor con bordes redondeados y sombra suave */
+.card {
+  background: var(--card);
+  border: 1px solid var(--bd);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+/* Encabezado superior de la aplicación */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap; /* Permite adaptarse a pantallas pequeñas */
+  margin-bottom: 12px;
+}
+
+/* Logotipo con degradado de color en el texto */
+.logo {
+  font-weight: 800;
+  font-size: 1.25rem;
+  background: linear-gradient(90deg, var(--ac), var(--ac2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* Hace transparente el texto para ver el degradado */
+}
+
+/* Contenedor de pestañas desplegable horizontalmente */
+.tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto; /* Permite scroll horizontal si no caben las pestañas */
+  margin-bottom: 14px;
+}
+
+/* Botones dentro de barras de pestañas y conmutadores de segmento */
+.tabs button, .seg button {
+  border: 1px solid var(--bd);
+  background: var(--card);
+  color: var(--tx);
+  padding: 9px 14px;
+  border-radius: 999px; /* Forma de píldora redondeada */
+  cursor: pointer;
+  white-space: nowrap;  /* Evita el salto de línea en el texto */
+  font: inherit;
+}
+
+/* Estado activo para botones de pestañas y segmentos */
+.tabs button.on, .seg button.on {
+  background: var(--ac);
+  border-color: var(--ac);
+  color: #fff;
+}
+
+/* Agrupador de botones estilo conmutador de segmento */
+.seg {
+  display: flex;
+  gap: 6px;
+  margin: 12px 0;
+}
+
+/* ============================================================================
+   4. FORMULARIOS, CAMPOS E INPUTS
+   ============================================================================ */
+
+/* Etiquetas de los campos de entrada */
+label {
+  display: block;
+  font-size: .85rem;
+  color: var(--mu);
+  margin: 10px 0 0;
+}
+
+/* Estilo unificado para inputs, menús desplegables y áreas de texto */
+input, select, textarea {
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px;
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--tx);
+  font: inherit;
+}
+
+/* Ajuste específico para el editor del área de texto */
+textarea {
+  min-height: 240px;
+  resize: vertical; /* Permite cambiar el tamaño solo verticalmente */
+}
+
+/* ============================================================================
+   5. BOTONES
+   ============================================================================ */
+
+/* Botón estándar primario */
+.btn {
+  background: var(--ac);
+  color: #fff;
+  border: 0;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+/* Botón estilo fantasma/transparente */
+.btn.ghost {
+  background: transparent;
+  color: var(--tx);
+  border: 1px solid var(--bd);
+}
+
+/* Botón de tamaño pequeño */
+.btn.sm {
+  padding: 6px 10px;
+  margin: 0;
+  font-size: .85rem;
+}
+
+/* Botón de acción destructiva / alerta (Rojo) */
+.btn.red {
+  background: #d64545;
+}
+
+/* Estado deshabilitado para botones */
+.btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+   6. VISTAS Y LAYOUTS ESPECÍFICOS
+   ============================================================================ */
+
+/* Contenedor centralizado para el formulario de Autenticación */
+.auth {
+  max-width: 400px;
+  margin: 6vh auto;
+  padding: 16px;
+}
+
+/* Separador 'o' en formularios */
+.or {
+  text-align: center;
+  color: var(--mu);
+  margin: 10px 0 0;
+}
+
+/* Mensajes de error */
+.err {
+  color: #d64545;
+  min-height: 1.2em;
+  margin: 8px 0 0;
+}
+
+/* Retícula de 2 columnas asimétricas (Lateral fija | Principal flexible) */
+.grid2 {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 14px;
+}
+
+/* Adaptación responsive para pantallas móviles (pantalla menor a 760px) */
+@media (max-width: 760px) {
+  .grid2 {
+    grid-template-columns: 1fr; /* Pasa a 1 sola columna desplegada hacia abajo */
+  }
+}
+
+/* Ítem seleccioanble dentro de la lista de borradores */
+.item {
+  padding: 10px;
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+/* Estado seleccionado de un ítem con mezcla suave de color de acento */
+.item.on {
+  border-color: var(--ac);
+  background: color-mix(in srgb, var(--ac) 10%, transparent);
+}
+
+/* Disposición flexible en fila para herramientas y campos */
+.row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.row > * {
+  flex: 1; /* Todos los elementos ocupan el mismo ancho por defecto */
+}
+
+.row .btn {
+  flex: 0 0 auto; /* Los botones dentro de una fila no se deforman */
+  margin-top: 12px;
+}
+
+/* ============================================================================
+   7. WIDGETS, ESTADÍSTICAS Y ELEMENTOS DE RED
+   ============================================================================ */
+
+/* Fila de conexión con red social */
+.net {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+/* Indicador de punto de estado (desconectado) */
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+  background: var(--bd);
+}
+
+/* Indicador de punto de estado activo (conectado) */
+.dot.ok {
+  background: var(--ok);
+}
+
+/* Indicador paso a paso del flujo de trabajo */
+.flow {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: .85rem;
+  margin: 6px 0 10px;
+}
+
+.flow span {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--bd);
+}
+
+/* Grid adaptable para tarjetas de estadísticas */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+/* Tarjeta individual de estadística numérica */
+.stat {
+  background: var(--card);
+  border: 1px solid var(--bd);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.stat b {
+  font-size: 1.8rem;
+  display: block;
+}
+
+/* Gráficos de barras estadísticas */
+.bar {
+  margin: 8px 0;
+}
+
+/* Contenedor/riel de la barra de porcentaje */
+.bar div.t {
+  height: 12px;
+  background: var(--bg);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--bd);
+}
+
+/* Relleno dinámico de la barra */
+.bar i {
+  display: block;
+  height: 100%;
+  border-radius: 6px;
+}
+
+/* ============================================================================
+   8. TABLAS, ETIQUETAS Y MULTIMEDIA
+   ============================================================================ */
+
+/* Estilos generales para tablas de datos */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .9rem;
+}
+
+td, th {
+  text-align: left;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--bd);
+}
+
+/* Etiqueta distintiva (pill/badge) */
+.tag {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: .75rem;
+  background: var(--bg);
+  border: 1px solid var(--bd);
+}
+
+/* Reproductor de video de previsualización */
+video {
+  width: 100%;
+  max-height: 240px;
+  border-radius: 10px;
+  margin-top: 8px;
+  background: #000;
+}
