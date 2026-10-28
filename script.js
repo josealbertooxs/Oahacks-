@@ -561,6 +561,46 @@ document.addEventListener('change', e => {
 });
 
 // ============================================================================
+// LÓGICA DE MODO OSCURO / MODO CLARO
+// ============================================================================
+
+// 1. Obtener el tema guardado en localStorage o la preferencia del sistema operativo
+const getPreferredTheme = () => {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) return savedTheme;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
+
+// 2. Aplicar el tema al documento y actualizar el icono del botón
+const applyTheme = (theme) => {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+
+  const iconEl = $('#theme-icon');
+  if (iconEl) {
+    // Si el tema es oscuro, mostramos el sol (para cambiar a claro); si no, mostramos la luna
+    iconEl.textContent = theme === 'dark' ? '☀️' : '🌙';
+  }
+};
+
+// 3. Alternar entre 'dark' y 'light'
+const toggleTheme = () => {
+  const currentTheme = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  applyTheme(newTheme);
+};
+
+// 4. Inicializar el tema al cargar la página
+applyTheme(getPreferredTheme());
+
+// 5. Escuchar los clics en el botón de cambio de tema mediante la delegación de eventos
+document.addEventListener('click', (e) => {
+  if (e.target.closest('#theme-toggle')) {
+    toggleTheme();
+  }
+});
+
+// ============================================================================
 // 7. ARRANQUE DE LA APLICACIÓN
 // ============================================================================
 
